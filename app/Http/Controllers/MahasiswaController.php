@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ class MahasiswaController extends Controller
     }
 
     public function index(){
-        $mahasiswa = Mahasiswa::with('mhs_prodi')->get();
+        $mahasiswa = Mahasiswa::get();
 
         return response()->json([
             'success' => true,
