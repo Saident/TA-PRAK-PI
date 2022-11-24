@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Mahasiswa;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,5 +20,29 @@ class MahasiswaController extends Controller
         //
     }
 
-    //
+    public function index(){
+        $mahasiswa = Mahasiswa::with('mhs_prodi')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'all mahasiswa',
+            'mahasiswa' => $mahasiswa,
+          ], 200);
+    }
+
+    public function profile(){
+        
+    }
+
+    public function nimprofile(){
+
+    }
+
+    public function addmatkul(){
+
+    }
+
+    public function delmatkul(){
+
+    }
 }

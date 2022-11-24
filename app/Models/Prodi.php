@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
+    // protected $primaryKey = 'idProdi';
 		/**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id',
         'nama', 
     ];
 
@@ -23,8 +23,8 @@ class Prodi extends Model
      */
     protected $hidden = [];
     
-    public function prodi()
+    public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class, 'nim');
+        return $this->hasMany(Mahasiswa::class, 'idProdi');
     }
 }

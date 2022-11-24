@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
+
+    // protected $primaryKey = 'nim';
 		/**
      * The attributes that are mass assignable.
      *
@@ -16,7 +18,8 @@ class Mahasiswa extends Model
         'nama', 
         'angkatan',
         'password',
-        'token',
+        'idProdi',
+        // 'token', not yet
     ];
 
     /**
@@ -25,16 +28,17 @@ class Mahasiswa extends Model
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password',
+        'id'
     ];
 
-    public function mhs_matkul()
+    public function matkul()
     {
-      return $this->hasMany(Matakuliah::class, 'id');
+      return $this->hasMany(Matakuliah::class, 'idMatkul');
     }
 
-    public function mhs_prodi()
+    public function prodi()
     {
-        return $this->hasOne(Prodi::class, 'id');
+        return $this->belongsTo(Prodi::class, 'idProdi');
     }
 }

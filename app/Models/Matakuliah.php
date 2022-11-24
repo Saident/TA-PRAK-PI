@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matakuliah extends Model
 {
+    // protected $primaryKey = 'idMatkul';
 		/**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id',
         'nama',
     ];
 

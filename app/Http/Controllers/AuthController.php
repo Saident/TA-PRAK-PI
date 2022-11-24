@@ -22,24 +22,25 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $nim = $request->nim;
-        $nama = $request->nama;
-        $angkatan = $request->angkatan;
         $password = Hash::make($request->password);
 
         $user = Mahasiswa::create([
-            'nim' => $nim,
-            'nama' => $nama,
-            'angkatan' => $angkatan,
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'angkatan' => $request->angkatan,
+            'idProdi' => $request->idProdi,
             'password' => $password,
         ]);
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'new user created',
+            'message' => 'new mahasiswa created',
             'data' => [
-            'user' => $user,
+                'user' => $user,
             ]
         ],200);
     }
+
+    public function login(request $request){}
+
 }
