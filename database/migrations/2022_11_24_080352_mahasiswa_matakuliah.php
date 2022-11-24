@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('mhsNim')->references('nim')->on('mahasiswas');
             $table->unsignedBigInteger('mkId')->unique();
             $table->foreign('mkId')->references('id')->on('matakuliahs');
+            $table->timestamps();
         });
     }
 
