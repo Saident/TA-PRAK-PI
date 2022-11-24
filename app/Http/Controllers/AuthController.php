@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -41,6 +44,38 @@ class AuthController extends Controller
         ],200);
     }
 
-    public function login(request $request){}
+    public function login(Request $request)
+    {
+        $nim = $request->nim;
+        $password = $request->password;
+
+        $user = Mahasiswa::where('nim', $nim)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'user not exist',
+            ],404);
+        }
+
+        if (!Hash::check($password, $user->password)) {
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'wrong password',
+            ],400);
+        }
+
+        // $idprodi = DB::select("SELECT idProdi FROM mahasiswas");
+        // $prodi = Prodi::where('idProdi', print_r($idprodi))->first();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'successfully login',
+            'data' => [
+                'user' => $user,
+                // 'prodi' => $prodi,
+            ]
+        ],200);
+    }
 
 }
