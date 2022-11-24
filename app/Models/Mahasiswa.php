@@ -15,6 +15,7 @@ class Mahasiswa extends Model
         'nim',
         'nama', 
         'angkatan',
+        'password',
         'token',
     ];
 
@@ -24,7 +25,7 @@ class Mahasiswa extends Model
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
 
     public function mhs_matkul()

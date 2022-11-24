@@ -31,7 +31,7 @@ class AuthController extends Controller
             'nim' => $nim,
             'nama' => $nama,
             'angkatan' => $angkatan,
-            'password' => $password
+            'password' => $password,
         ]);
 
         return response()->json([
