@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nim')->primary();
 			$table->string('nama');
             $table->integer('angkatan');
-            $table->integer('idProdi')->nullable();
+            $table->integer('id')->nullable();
             $table->string('password');
             $table->timestamps();
         });

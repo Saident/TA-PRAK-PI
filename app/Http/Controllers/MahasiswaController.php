@@ -21,7 +21,7 @@ class MahasiswaController extends Controller
         //
     }
 
-    public function index(){
+    public function allmhs(){
         $mahasiswa = Mahasiswa::get();
 
         return response()->json([
@@ -35,8 +35,23 @@ class MahasiswaController extends Controller
         
     }
 
-    public function nimprofile(){
+    public function nimprofile(Request $request){
+        $nim = $request->nim;
+        $mahasiswa = Mahasiswa::where('nim','=',$nim)->first();
+        // $mahasiswa = Mahasiswa::find($request->nim);
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Mahasiswa Grabbed',
+            'data' => [
+                'post' => [
+                    'nim' => $mahasiswa->nim,
+                    'nama' => $mahasiswa->nama,
+                    'angkatan' => $mahasiswa->angkatan,
+                    'prodi' => $mahasiswa->prodi,
+                ]
+            ]
+        ]);
     }
 
     public function addmatkul(){

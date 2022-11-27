@@ -12,8 +12,15 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    use WithoutModelEvents;
+
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        $this->call([
+            ProdiSeeder::class,
+        ]);
+        $this->call([
+            MahasiswaSeeder::class,
+        ]);
     }
 }

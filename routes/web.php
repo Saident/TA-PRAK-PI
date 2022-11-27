@@ -26,7 +26,7 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 });
 
 $router->group(['prefix' => 'mahasiswa'], function () use ($router) {
-    $router->get('/', ['uses' => 'MahasiswaController@index']);
+    $router->get('/', ['uses' => 'MahasiswaController@allmhs']);
     $router->get('/profile', ['uses' => 'MahasiswaController@profile']);
     $router->get('/{nim}', ['uses' => 'MahasiswaController@nimprofile']);
     $router->post('/{nim}/matakuliah/{mkId}', ['uses' => 'MahasiswaController@addmatkul']);

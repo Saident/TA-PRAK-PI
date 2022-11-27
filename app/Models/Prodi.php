@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    // protected $primaryKey = 'idProdi';
+    protected $primaryKey = 'id';
 		/**
      * The attributes that are mass assignable.
      *
@@ -25,6 +25,6 @@ class Prodi extends Model
     
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class, 'idProdi');
+        return $this->hasMany(Mahasiswa::class, 'id');
     }
 }
