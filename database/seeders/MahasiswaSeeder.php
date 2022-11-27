@@ -21,7 +21,7 @@ class MahasiswaSeeder extends Seeder
                 'nim' => '205150701111030',
                 'nama' => 'Averil Primayuda',
                 'angkatan' => 2020,
-                'id' => 1,
+                'prodiId' => 1,
                 'password' => Hash::make('averil123')
             ]
             ];

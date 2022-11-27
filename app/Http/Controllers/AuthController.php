@@ -31,7 +31,7 @@ class AuthController extends Controller
             'nim' => $request->nim,
             'nama' => $request->nama,
             'angkatan' => $request->angkatan,
-            'idProdi' => $request->idProdi,
+            'prodiId' => $request->prodiId,
             'password' => $password,
         ]);
 

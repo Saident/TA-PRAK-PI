@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('mahasiswa_matakuliah', function (Blueprint $table) {
             $table->id();
-            $table->string('mhsNim');
-            $table->foreign('mhsNim')->references('nim')->on('mahasiswas');
-            $table->unsignedBigInteger('mkId')->unique();
-            $table->foreign('mkId')->references('id')->on('matakuliahs');
+            $table->foreignId('mhsNim')->unsigned();
+            // $table->foreign('mhsNim')->references('nim')->on('mahasiswas');
+            $table->foreignId('mkId')->unsigned();
+            // $table->foreign('mkId')->references('id')->on('matakuliahs');
             $table->timestamps();
         });
     }

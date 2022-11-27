@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mahasiswa extends Model
 {
 
-    // public $primaryKey = 'nim';
+    public $primaryKey = 'nim';
 		/**
      * The attributes that are mass assignable.
      *
@@ -18,7 +18,7 @@ class Mahasiswa extends Model
         'nama', 
         'angkatan',
         'password',
-        'id',
+        'prodiId',
         // 'token', not yet
     ];
 
@@ -32,13 +32,18 @@ class Mahasiswa extends Model
         'id'
     ];
 
+    // public function matkul()
+    // {
+    //   return $this->hasMany(Matakuliah::class, 'id');
+    // }
+
     public function matkul()
     {
-      return $this->hasMany(Matakuliah::class, 'idMatkul');
+      return $this->belongsToMany(Matakuliah::class, 'mahasiswa_matakuliah','mhsNim','mkId');
     }
 
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class, 'id');
+        return $this->belongsTo(Prodi::class, 'prodiId');
     }
 }

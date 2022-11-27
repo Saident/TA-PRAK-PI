@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matakuliah extends Model
 {
-    // protected $primaryKey = 'idMatkul';
+    protected $primaryKey = 'id';
 		/**
      * The attributes that are mass assignable.
      *
@@ -23,7 +23,7 @@ class Matakuliah extends Model
      */
     protected $hidden = [];
 
-    public function matkul() {
-        return $this->belongsToMany(Mahasiswa::class, 'nim');
+    public function mahasiswa() {
+        return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_matakuliah','mhsNim','mkId');
       }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use App\Models\Matakuliah;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,13 +50,24 @@ class MahasiswaController extends Controller
                     'nama' => $mahasiswa->nama,
                     'angkatan' => $mahasiswa->angkatan,
                     'prodi' => $mahasiswa->prodi,
+                    'matkul' => $mahasiswa->matkul,
                 ]
             ]
         ]);
     }
 
-    public function addmatkul(){
+    public function addmatkul(Request $request){
+        $nim = $request->nim;
+        $mhsNim = $request->nim;
+        // $mahasiswa = Mahasiswa::where('nim','=',$nim)->first();
+        $mahasiswa = Mahasiswa::find($request->nim);
 
+        $mahasiswa->matkul()->attach($request->mkId);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Matkul added to mhs',
+        ]);
     }
 
     public function delmatkul(){
