@@ -105,11 +105,8 @@ class AuthController extends Controller
       $user->save();
   
       return response()->json([
-        'status' => 'Success',
-        'message' => 'successfully login',
-        'data' => [
-          'user' => $user,
-        ]
+        'user' => $user,
+        'token' => $user->token,
       ], 200);
     }
 

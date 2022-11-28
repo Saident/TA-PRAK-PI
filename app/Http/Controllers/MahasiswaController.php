@@ -24,55 +24,44 @@ class MahasiswaController extends Controller
 
     public function allmhs(){
         
-        $mahasiswa = Mahasiswa::get();
+        $mahasiswa = Mahasiswa::with('prodi')->get();
+            return response()->json([
+                'mahasiswa' => $mahasiswa,
+              ], 200);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'all mahasiswa',
-            'mahasiswa' => $mahasiswa,
-          ], 200);
     }
 
-    public function profile(){
-        
+    public function profile(Request $request){
+        $mahasiswa = $request->user;
     }
 
     public function nimprofile(Request $request){
-        $mahasiswa = Mahasiswa::find($request->nim);
+        $mahasiswa = Mahasiswa::with('matakuliah', 'prodi')->find($request->nim);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Mahasiswa Grabbed',
-            'data' => [
-                'post' => [
-                    'nim' => $mahasiswa->nim,
-                    'nama' => $mahasiswa->nama,
-                    'angkatan' => $mahasiswa->angkatan,
-                    'prodi' => $mahasiswa->prodi,
-                    'matkul' => $mahasiswa->matkul,
-                ]
-            ]
+            'mahasiswa' => $mahasiswa,
         ]);
-    }
-
-    public function listMatkul(Request $request) {
-
     }
 
     public function addmatkul(Request $request){
-        $nim = $request->nim;
-        $mhsNim = $request->nim;
         $mahasiswa = Mahasiswa::find($request->nim);
 
-        $mahasiswa->matkul()->attach($request->mkId);
+        $mahasiswa->matakuliah()->attach($request->mkId);
 
         return response()->json([
             'success' => true,
-            'message' => 'Matkul added to mhs',
+            'message' => 'Matkul added to mahasiswa',
         ]);
     }
 
-    public function delmatkul(){
-        
+    public function delmatkul(Request $request){
+        $mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim);
+        // $matakuliah = Matakuliah::with('mahasiswa')->find($request->matakuliahId);
+        $mahasiswa->matakuliah()->detach($request->mkId);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Matkul deleted',
+        ]);
     }
 }

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mahasiswa_matakuliah', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
             $table->foreignId('mhsNim')->unsigned();
             // $table->foreign('mhsNim')->references('nim')->on('mahasiswas');
-            $table->foreignId('mkId')->unsigned();
+            $table->foreignId('mkId')->unsigned()->unique();
             // $table->foreign('mkId')->references('id')->on('matakuliahs');
             $table->timestamps();
         });
