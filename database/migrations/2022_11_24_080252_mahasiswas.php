@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('angkatan');
             $table->integer('prodiId');
             $table->string('password');
+            $table->string('token')->unique()->nullable();
             $table->timestamps();
         });
     }
