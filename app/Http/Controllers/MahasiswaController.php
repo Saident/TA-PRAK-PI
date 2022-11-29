@@ -44,18 +44,9 @@ class MahasiswaController extends Controller
     }
 
     public function addmatkul(Request $request){
-        $nim = $request->nim;
-        $mkId = $request->mkId;
-        // $mahasiswa = Mahasiswa::find($request->nim);
-        // $mahasiswa->matakuliah()->attach($request->mkId);
-        
-        if($mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim)
-            ->where('mkId', '=', $mkId)
-            ->get()){
-            $mahasiswa->matakuliah()->attach($request->mkId);
-        }else{
-            $mahasiswa->matakuliah()->detach($request->mkId);
-        }
+        $mahasiswa = Mahasiswa::find($request->nim);
+
+        $mahasiswa->matakuliah()->attach($request->mkId);
 
         return response()->json([
             'success' => true,
@@ -65,6 +56,7 @@ class MahasiswaController extends Controller
 
     public function delmatkul(Request $request){
         $mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim);
+        // $matakuliah = Matakuliah::with('mahasiswa')->find($request->matakuliahId);
         $mahasiswa->matakuliah()->detach($request->mkId);
 
         return response()->json([
