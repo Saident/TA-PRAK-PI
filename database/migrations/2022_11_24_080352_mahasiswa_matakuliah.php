@@ -17,7 +17,7 @@ return new class extends Migration
             // $table->id();
             $table->foreignId('mhsNim')->unsigned();
             // $table->foreign('mhsNim')->references('nim')->on('mahasiswas');
-            $table->foreignId('mkId')->unsigned()->unique();
+            $table->foreignId('mkId')->unsigned();
             // $table->foreign('mkId')->references('id')->on('matakuliahs');
             $table->timestamps();
         });
