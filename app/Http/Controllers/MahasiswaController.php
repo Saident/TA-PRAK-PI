@@ -45,8 +45,7 @@ class MahasiswaController extends Controller
 
     public function addmatkul(Request $request){
         $mahasiswa = Mahasiswa::find($request->nim);
-
-        $mahasiswa->matakuliah()->attach($request->mkId);
+        $mahasiswa->matakuliah()->syncWithoutDetaching($request->mkId);
 
         return response()->json([
             'success' => true,
