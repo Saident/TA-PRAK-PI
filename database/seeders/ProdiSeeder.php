@@ -23,7 +23,7 @@ class ProdiSeeder extends Seeder
                 'nama' => 'Sistem Informasi'
             ],
             [
-                'nama' => 'Sistem Informasi'
+                'nama' => 'Pendidikan Teknologi Informasi'
             ],
             [
                 'nama' => 'Teknik Informatika'

@@ -50,7 +50,7 @@ class MahasiswaController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Matkul added to mahasiswa',
-        ]);
+        ], 200);
     }
 
     public function delmatkul(Request $request){
