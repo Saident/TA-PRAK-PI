@@ -29,7 +29,7 @@ class MahasiswaSeeder extends Seeder
                 'nama' => 'Gilbert Aryaduta Pinem',
                 'angkatan' => 2020,
                 'prodiId' => 2,
-                'password' => Hash::make('pinem123')
+                'password' => Hash::make('pinem1234')
             ]
             ];
 
