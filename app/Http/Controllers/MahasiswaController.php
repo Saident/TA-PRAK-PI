@@ -33,6 +33,11 @@ class MahasiswaController extends Controller
 
     public function profile(Request $request){
         $mahasiswa = $request->user;
+        return response()->json([
+            'success' => true,
+            'mahasiswa' => $mahasiswa,
+            'token' => $mahasiswa->token,
+        ]);
     }
 
     public function nimprofile(Request $request){
