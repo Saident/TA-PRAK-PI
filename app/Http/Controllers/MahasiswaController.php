@@ -42,14 +42,14 @@ class MahasiswaController extends Controller
 
     public function nimprofile(Request $request){
         $mahasiswa = Mahasiswa::with('matakuliah', 'prodi')->find($request->nim);
-
         return response()->json([
             'mahasiswa' => $mahasiswa,
         ]);
     }
 
     public function addmatkul(Request $request){
-        $mahasiswa = Mahasiswa::find($request->nim);
+        $mahasiswa = $request->user;
+        // $mahasiswa = Mahasiswa::find($request->nim);
         $mahasiswa->matakuliah()->syncWithoutDetaching($request->mkId);
 
         return response()->json([
@@ -59,13 +59,13 @@ class MahasiswaController extends Controller
     }
 
     public function delmatkul(Request $request){
-        $mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim);
-        // $matakuliah = Matakuliah::with('mahasiswa')->find($request->matakuliahId);
+        $mahasiswa = $request->user;
+        // $mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim);
         $mahasiswa->matakuliah()->detach($request->mkId);
 
         return response()->json([
             'success' => true,
             'message' => 'Matkul deleted',
-        ]);
+        ], 200);
     }
 }

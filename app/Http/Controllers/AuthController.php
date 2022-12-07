@@ -46,40 +46,6 @@ class AuthController extends Controller
         ],200);
     }
 
-    // public function login(Request $request)s
-    // {
-    //     $nim = $request->nim;
-    //     $password = $request->password;
-
-    //     $user = Mahasiswa::where('nim', $nim)->first();
-
-    //     if (!$user) {
-    //         return response()->json([
-    //             'status' => 'Error',
-    //             'message' => 'user not exist',
-    //         ],404);
-    //     }
-
-    //     if (!Hash::check($password, $user->password)) {
-    //         return response()->json([
-    //             'status' => 'Error',
-    //             'message' => 'wrong password',
-    //         ],400);
-    //     }
-
-    //     // $idprodi = DB::select("SELECT idProdi FROM mahasiswas");
-    //     // $prodi = Prodi::where('idProdi', print_r($idprodi))->first();
-
-    //     return response()->json([
-    //         'status' => 'Success',
-    //         'message' => 'successfully login',
-    //         'data' => [
-    //             'user' => $user,
-    //             // 'prodi' => $prodi,
-    //         ]
-    //     ],200);
-    // }
-
     public function login(Request $request)
     {
       $nim = $request->nim;
@@ -101,7 +67,7 @@ class AuthController extends Controller
         ], 400);
       }
   
-      $user->token = $this->jwt($user); //
+      $user->token = $this->jwt($user);
       $user->save();
   
       return response()->json([
@@ -110,14 +76,12 @@ class AuthController extends Controller
       ], 200);
     }
 
-    // jwt
-
      private function base64url_encode(String $data): String
     {
-        $base64 = base64_encode($data); // ubah json string menjadi base64
-        $base64url = strtr($base64, '+/', '-_'); // ubah char '+' -> '-' dan '/' -> '_'
+        $base64 = base64_encode($data);
+        $base64url = strtr($base64, '+/', '-_');
 
-        return rtrim($base64url, '='); // menghilangkan '=' pada akhir string
+        return rtrim($base64url, '=');
     }
 
     private function sign(String $header, String $payload, String $secret): String
@@ -131,10 +95,10 @@ class AuthController extends Controller
     protected function jwt(Mahasiswa $user)
     {
       $payload = [
-        'iss' => 'lumen-jwt', //issuer of the token
-        'sub' => $user->nim, //subject of the token
-        'iat' => time(), //time when JWT was issued.
-        'exp' => time() + 60 * 60 //time when JWT will expire
+        'iss' => 'lumen-jwt',
+        'sub' => $user->nim,
+        'iat' => time(),
+        'exp' => time() + 60 * 60
       ];
   
       return JWT::encode($payload, env('JWT_SECRET'), 'HS256');
