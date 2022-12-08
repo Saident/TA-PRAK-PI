@@ -49,18 +49,24 @@ class MahasiswaController extends Controller
 
     public function addmatkul(Request $request){
         $mahasiswa = $request->user;
-        // $mahasiswa = Mahasiswa::find($request->nim);
-        $mahasiswa->matakuliah()->syncWithoutDetaching($request->mkId);
+        $nim = Mahasiswa::find($request->nim);
 
+        if ($mahasiswa->nim != $nim->nim) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorize',
+            ], 401);
+        }else{
+            $mahasiswa->matakuliah()->syncWithoutDetaching($request->mkId);
         return response()->json([
-            'success' => true,
-            'message' => 'Matkul added to mahasiswa',
-        ], 200);
+                'success' => true,
+                'message' => 'Matkul added to mahasiswa',
+            ], 200);
+        }
     }
 
     public function delmatkul(Request $request){
         $mahasiswa = $request->user;
-        // $mahasiswa = Mahasiswa::with('matakuliah')->find($request->nim);
         $mahasiswa->matakuliah()->detach($request->mkId);
 
         return response()->json([
